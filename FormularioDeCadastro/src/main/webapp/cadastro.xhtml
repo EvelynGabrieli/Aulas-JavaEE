@@ -30,7 +30,7 @@
 			<h:inputText value = "#{cadastro.senha2}"></h:inputText>
 			
 			Sexo:
-			<h:selectOneRadio> 
+			<h:selectOneRadio value = "#{cadastro.sexo}"> 
 				<f:selectItem itemValue="F" itemLabel="Feminino"></f:selectItem>
 				<f:selectItem itemValue="M" itemLabel="Masculino"></f:selectItem>
 			</h:selectOneRadio>
@@ -43,7 +43,7 @@
 			
 			Linguagens de Programação:
 			<h:selectManyCheckbox value="#{cadastro.linguagens}">
-				<f:selectItems value="#{cadastro.listaLinguagens}" var="l" itemValue="#{l.id}" itemLabel="{#l.nome}" ></f:selectItems>
+				<f:selectItems value="#{cadastro.listaLinguagens}" var="l" itemValue="#{l.id}" itemLabel="#{l.nome}"></f:selectItems>
 			</h:selectManyCheckbox>
 			
 		</h:panelGrid>	
