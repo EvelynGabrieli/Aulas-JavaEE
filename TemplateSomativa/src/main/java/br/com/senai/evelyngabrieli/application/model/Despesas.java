@@ -1,32 +1,32 @@
 package br.com.senai.evelyngabrieli.application.model;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+@Entity
 public class Despesas {
-	//atributos primitivos n�o podem ser nulos, por isso usamos os wrappers
+
+	@Id
+	@GeneratedValue
+	
+	private Integer id;
 	private String data;
 	private String descricao;
 	private Double valor;
-	private Boolean edit;
-
+	private boolean edit;
+	
+	
+	public Integer getId() {
+		return id;
+	}
+	public void setId(Integer id) {
+		this.id = id;
+	}
+	
 	public String getData() {
 		return data;
 	}
-
-
-	public Despesas(String data, String descricao, Double valor) {
-		super();
-		this.data = data;
-		this.descricao = descricao;
-		this.valor = valor;
-	}
-
-	public Despesas() {
-		super();
-		this.data = data;
-		this.descricao = descricao;
-		this.valor = valor;
-	}
-
-
 	public void setData(String data) {
 		this.data = data;
 	}
@@ -42,13 +42,23 @@ public class Despesas {
 	public void setValor(Double valor) {
 		this.valor = valor;
 	}
-	public Boolean getEdit() {
+	public boolean getEdit() {
 		return edit;
 	}
-	public void setEdit(Boolean edit) {
+	public void setEdit(boolean edit) {
 		this.edit = edit;
 	}
-
-
-		
+	
+	public Despesas(String data, String descricao, Double valor) {
+		super();
+		this.data = data;
+		this.descricao = descricao;
+		this.valor = valor;
 	}
+	
+	public Despesas() { //Construtor vazio
+		super();
+	}
+	
+	
+}

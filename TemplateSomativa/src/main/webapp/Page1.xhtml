@@ -10,13 +10,13 @@
 	
 <ui:composition template="/Template.xhtml" >
 
-<ui:param name="Titulo" value="Lista Despesas" />
+<ui:param name="Titulo" value="Lista Despesas" /> <!-- titulo do cabecalho -->
 <ui:define name="conteudo">
 
 
 
 <script>
-		function verificarCampos(){
+		function verificarCampos(){  //funcao para verificar se colocou informacoes dentro do campo, caso não aparece as seguintes mensagens
 			var data = document.getElementById("f:data").value;
 			var descricao = document.getElementById("f:descricao").value;
 			var valor = document.getElementById("f:valor").value;
@@ -44,7 +44,7 @@
 	</script>
 <body>
 
-<h:outputStylesheet library = "css" name = "styles.css" /> 
+<h:outputStylesheet library = "css" name = "styles.css" /> <!-- chamando o css -->
 	<h:form id="f">
 	
 	<h:panelGroup value="" >
@@ -53,25 +53,27 @@
 	<h:column>
 	<h:outputText value="Data da Despesa"></h:outputText>
 	<br/>
-	<h:inputText value="#{tabela.data1}" id="data"></h:inputText>
+	<h:inputText value="#{tabela.data}" id="data"></h:inputText>
 	</h:column>
 	
 	<h:column>
 	<h:outputText value="Descrição da Despesa"></h:outputText>
 	<br/>
-	<h:inputText value="#{tabela.desc1}" id="descricao"></h:inputText>
+	<h:inputText value="#{tabela.descricao}" id="descricao"></h:inputText>
 	</h:column>
 	
 	<h:column>
 	<h:outputText value="Valor da Despesa"></h:outputText>
 	<br/>
-	<h:inputText value="#{tabela.valor1}" id="valor"></h:inputText>
+	<h:inputText value="#{tabela.valor}" id="valor"></h:inputText>
 	</h:column>
 	
 	<h:commandButton value="Inserir" action="#{tabela.inserir(tabela.data1,tabela.desc1,tabela.valor1)}" onclick="return verificarCampos()"></h:commandButton>
 	</h:panelGrid>
 	</h:panelGroup>
 	
+	
+	<!-- Começo da tabela de acordo com as informaçoes preenchidas pelo usuario -->
 	<h:panelGroup rendered="#{tabela.a == true }">
 		<table>
 			

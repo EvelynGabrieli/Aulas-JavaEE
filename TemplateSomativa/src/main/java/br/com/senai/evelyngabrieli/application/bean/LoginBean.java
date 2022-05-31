@@ -1,6 +1,6 @@
 package br.com.senai.evelyngabrieli.application.bean;
 
-import java.io.Serializable;
+import java.io.Serializable; //importação serializable
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
@@ -10,8 +10,8 @@ import javax.inject.Named;
 @Named("login")
 @RequestScoped 
 public class LoginBean implements Serializable { // implementar o serializable para mandar todas as informações para a rede
-	private String nome;
-	private String senha;
+	private String nome; //variaveis
+	private String senha; //variaveis
 	
 	@PostConstruct	//chama assim que construir o bean
 	public void onCreate() {

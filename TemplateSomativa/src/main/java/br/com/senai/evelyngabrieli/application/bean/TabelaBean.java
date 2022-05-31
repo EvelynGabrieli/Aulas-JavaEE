@@ -1,97 +1,100 @@
 package br.com.senai.evelyngabrieli.application.bean;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.context.FacesContext;
+import javax.inject.Inject;
 import javax.inject.Named;
 
+import br.com.senai.evelyngabrieli.jpa.ejbbean.DespesasBean;
 import br.com.senai.evelyngabrieli.application.model.Despesas;
+@SuppressWarnings("serial") //remove os anuncios de advertencia
+@SessionScoped //tempo de vida da pagina. o "session" mantem dados enquanto o navegador estiver aberto
+@Named("tabela") //para chamar a tabela com nome mais facil em outra pagina
 
-@SuppressWarnings("serial") //tira anuncios de advert�ncia
-@Named("tabela")
-@SessionScoped //tempo de vida da p�gina, o "session" mant�m os dados enquanto o navegador estiver aberto
 public class TabelaBean implements Serializable{
-	
-	private List<Despesas> despesas = new ArrayList<>();
-	//lista que trabalha com o jsf
-	String data1;
-	String desc1;
-	Double Valor1;
-	Boolean a = false; 
-	
-	
-	public String getData1() {
-		return data1;
-	}
 
-	public void setData1(String data1) {
-		this.data1 = data1;
-	}
-
-	public String getDesc1() {
-		return desc1;
-	}
-
-	public void setDesc1(String desc1) {
-		this.desc1 = desc1;
-	}
-
-	public Double getValor1() {
-		return Valor1;
-	}
-
-	public void setValor1(Double valor1) {
-		Valor1 = valor1;
-	}
-
+	@EJB
+	private DespesasBean despesabean; 
 	
+	private Integer despesaID; 
 	
+	private List<Despesas> despesas = new ArrayList<>(); //lista que trabalha com o jsf
 	
-	
-	public String inserir(String data,String desc,Double Valor) {
+	String data;
+	String descricao;
+	Double valor;
+	Boolean back = false;
+			
 		
-		Despesas d = new Despesas(data,desc,Valor); //inst�ncia da listdatamodel
+	public String getData() {
+			return data;
+	}
+	public void setData(String data) {
+			this.data = data;
+	}
+	public String getDescricao() {
+			return descricao;
+	}
+	public void setDescricao(String descricao) {
+			this.descricao = descricao;
+	}
+	public Double getValor() {
+			return valor;
+	}
+	public void setValor(Double valor) {
+			this.valor = valor;
+	}
+	
+	public Boolean getBack() {
+		return back;
+	}
+	public void setBack(Boolean back) {
+		this.back = back;
+	}
+	
+	//usado para criar um novo objeto na tabela
+	public String inserir(String data, String descricao, Double valor) {
+		Despesas d = new Despesas(data, descricao, valor);
 		d.setEdit(true);
-		a =true;
+		back = true;
+		despesabean.inserir(d);
 		despesas.add(d);
-		data1 = null;
-		desc1 = null;
-		Valor1= null;
-		return null;
-		
-	}
-	
-	public String excluir(Despesas despesa) {
-		
-		despesas.remove(despesa);
-		
+		data = null;
+		descricao = null;
+		valor = null;
 		return null;
 	}
 	
-	public String editar(Despesas despesa) {
-		despesa.setEdit(true); 
+	//usado para excluir um objeto dentro da tabela
+	public void excluir(Despesas despesa) {
+		despesabean.excluir(despesa);
+		despesas = null;
+	}
+	
+	//usado para editar um objeto que ja existe dentro da tabela
+	public String editar(Despesas despesa) { 
+		despesa.setEdit(true);
 		
 		return null;
 	}
 	
-	public String gravar (Despesas despesa) {
+	//usado para gravar um objeto dentro tabela
+	public String gravar(Despesas despesa) { 
 		despesa.setEdit(false);
-		
 		return null;
 	}
 	
-	public List<Despesas> getDespesas() {
+
+	public List<Despesas> getDespesas(){
+		if(despesas==null) {
+			 List<Despesas> despesas = new ArrayList<>();
+		}
 		return despesas;
 	}
-
-	public Boolean getA() {
-		return a;
-	}
-
-	public void setA(Boolean a) {
-		this.a = a;
-	}
-
+	
+	
 }
