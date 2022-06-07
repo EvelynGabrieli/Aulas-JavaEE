@@ -3,14 +3,16 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
-import javax.faces.context.FacesContext;
-import javax.inject.Inject;
 import javax.inject.Named;
 
 import br.com.senai.evelyngabrieli.jpa.ejbbean.DespesasBean;
+import br.com.senai.evelyngabrieli.jpa.ejbbean.ProdutoBean;
+
 import br.com.senai.evelyngabrieli.application.model.Despesas;
+import br.com.senai.evelyngabrieli.application.model.Produtos;
 @SuppressWarnings("serial") //remove os anuncios de advertencia
 @SessionScoped //tempo de vida da pagina. o "session" mantem dados enquanto o navegador estiver aberto
 @Named("tabela") //para chamar a tabela com nome mais facil em outra pagina
@@ -20,15 +22,26 @@ public class TabelaBean implements Serializable{
 	@EJB
 	private DespesasBean despesabean; 
 	
+	@EJB
+	private ProdutoBean produtobean;
+	
 	private Integer despesaID; 
 	
-	private List<Despesas> despesas = new ArrayList<>(); //lista que trabalha com o jsf
+	private List<Despesas> despesas = new ArrayList<>(); //lista que trabalha com o jsf, recebe a lista e grava na tabela
 	
 	String data;
 	String descricao;
 	Double valor;
 	Boolean back = false;
-			
+	private List<Produtos> produtos;
+	private Integer[] selectedProdutosIds;
+	
+	@PostConstruct //assim que carregou a pagina executa esse metodo
+	public void init() {
+		//mostra na tela todos os clientes e produtos cadastrados assim que iniciar
+		produtos = produtobean.listar();
+	}
+
 		
 	public String getData() {
 			return data;
@@ -58,7 +71,7 @@ public class TabelaBean implements Serializable{
 	
 	//usado para criar um novo objeto na tabela
 	public String inserir(String data, String descricao, Double valor) {
-		Despesas d = new Despesas(data, descricao, valor);
+		Despesas d = new Despesas(data, descricao, valor); // Serve para acrescentar mais uma despesa na lista, na variavel d
 		d.setEdit(true);
 		back = true;
 		despesabean.inserir(d);
@@ -94,6 +107,13 @@ public class TabelaBean implements Serializable{
 			 List<Despesas> despesas = new ArrayList<>();
 		}
 		return despesas;
+	}
+	
+	public List<Produtos> getProdutos() { // lista todos os produtos
+		return produtos;
+	}
+	public Integer[] getSelectedProdutosIds() {
+		return selectedProdutosIds;
 	}
 	
 	

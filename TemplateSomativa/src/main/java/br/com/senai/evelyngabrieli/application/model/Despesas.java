@@ -1,14 +1,25 @@
 package br.com.senai.evelyngabrieli.application.model;
 
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.JoinColumn;
 
-@Entity
-public class Despesas {
 
-	@Id
-	@GeneratedValue
+
+@SuppressWarnings("serial")
+@Entity //entidade
+public class Despesas implements Serializable{
+
+	@Id //id identificador para atributos da tabela
+	@GeneratedValue 
 	
 	private Integer id;
 	private String data;
@@ -16,6 +27,11 @@ public class Despesas {
 	private Double valor;
 	private boolean edit;
 	
+	@ManyToMany(fetch = FetchType.EAGER)// muitos pra muitos
+	@JoinTable(name = "despesas_produtos", // uma tabela que junta os dois
+		joinColumns = @JoinColumn(name = "despesas_id"),
+		inverseJoinColumns = @JoinColumn(name = "produtos_idProduto")) 
+	private List<Produtos> produtos = new ArrayList<Produtos>();
 	
 	public Integer getId() {
 		return id;
@@ -49,14 +65,14 @@ public class Despesas {
 		this.edit = edit;
 	}
 	
-	public Despesas(String data, String descricao, Double valor) {
+	public Despesas(String data, String descricao, Double valor) {//com parametros
 		super();
 		this.data = data;
 		this.descricao = descricao;
 		this.valor = valor;
 	}
 	
-	public Despesas() { //Construtor vazio
+	public Despesas() { //vazio
 		super();
 	}
 	

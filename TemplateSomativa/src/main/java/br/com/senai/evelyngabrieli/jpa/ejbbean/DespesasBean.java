@@ -1,12 +1,12 @@
 package br.com.senai.evelyngabrieli.jpa.ejbbean;
-import java.util.List;
+
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import br.com.senai.evelyngabrieli.application.model.Despesas;
 
-@Stateless // tipo de bean
+@Stateless // tipo de bean que é semelhante ao request
 public class DespesasBean { //Logica de negocio
 	
 	@PersistenceContext  //vai ser responsavel por fazer a conexão com o banco de dados

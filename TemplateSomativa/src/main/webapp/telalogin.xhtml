@@ -17,12 +17,12 @@
 	<h:form>
 		<h:panelGrid columns = "2">
 		Nome:
-		<h:inputText value="#{login.nome}"></h:inputText>
+		<h:inputText value="#{login.nome}"></h:inputText> <!-- campo para colocar o login de acordo com o que está cadastrado no banco de dados -->
 		Senha:
-		<h:inputSecret value="#{login.senha}"></h:inputSecret> <!-- para deixar a senha secreta -->
+		<h:inputSecret value="#{login.senha}"></h:inputSecret> <!-- para deixar a senha secreta -->  <!-- campo para colocar o login de acordo com o que está cadastrado no banco de dados -->
 		</h:panelGrid>
 		
-		<h:commandButton id="login" value="Login" action="#{login.doLogin}"></h:commandButton> <!-- id, como que vou identificar, action ação -->
+		<h:commandButton id="login" value="Login" action="#{login.doLogin}"></h:commandButton> <!-- id, como que vou identificar, action ação -->  <!--botão para fazer login e seguir para outra pagina se as informações estiverem iguais ao do banco de dados -->
 		
 	</h:form>
 	
