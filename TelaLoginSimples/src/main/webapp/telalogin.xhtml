@@ -17,12 +17,12 @@
 	<h:form>
 		<h:panelGrid columns = "2">
 		Nome:
-		<h:inputText value="#{login.nome}"></h:inputText>
+		<h:inputText value="#{login.nome}"></h:inputText> <!--função para chamar o bean de acordo com a variavel-->
 		Senha:
-		<h:inputSecret value="#{login.senha}"></h:inputSecret> <!-- para deixar a senha secreta -->
+		<h:inputSecret value="#{login.senha}"></h:inputSecret> <!-- para deixar a senha secreta -->  <!--função para chamar o bean de acordo com a variavel-->
 		</h:panelGrid>
 		
-		<h:commandButton id="login" value="Login" action="#{login.doLogin}"></h:commandButton> <!-- id, como que vou identificar, action a��o -->
+		<h:commandButton id="login" value="Login" action="#{login.doLogin}"></h:commandButton> <!-- id, como que vou identificar, action ação -->
 		
 	</h:form>
 	
