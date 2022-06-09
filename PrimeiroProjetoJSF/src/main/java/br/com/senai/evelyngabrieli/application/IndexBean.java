@@ -7,7 +7,7 @@ import javax.inject.Named;
 
 @SuppressWarnings("serial")
 @Named
-@RequestScoped
+@RequestScoped //Só fica ativo quando é solicitado
 public class IndexBean implements Serializable {
 
 	 	public String getMensagem() {
